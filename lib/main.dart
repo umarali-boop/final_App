@@ -1,5 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:final_app/utils/app_routes.dart';
+import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -453,13 +460,12 @@ import 'package:file_picker/file_picker.dart';
 //     );
 //   }
 // }
-import 'package:final_app/utils/app_routes.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // setUrlStrategy(PathUrlStrategy());
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
       .then((_) {
     runApp(const MyApp());

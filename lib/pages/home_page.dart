@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:path_provider/path_provider.dart';
 import '../samples/sample_data.dart';
 import '../samples/sample_data_nomedia.dart';
 import '../samples/sample_data_testing.dart';

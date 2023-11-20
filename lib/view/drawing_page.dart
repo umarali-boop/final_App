@@ -29,20 +29,21 @@ class DrawingPage extends HookWidget {
       duration: const Duration(milliseconds: 150),
       initialValue: 1,
     );
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _CustomAppBar(animationController: animationController),
-          Stack(
-            children: [
-              Positioned(
-                child: Container(
-                  // height: MediaQuery.sizeOf(context).height*0.9,
-                  // width: MediaQuery.sizeOf(context).width*0.6,
-                  margin: const EdgeInsets.symmetric(horizontal: 120,vertical: 0,),
+    return Scaffold(
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+            _CustomAppBar(animationController: animationController),
+            Stack(
+              children: [
+                Container(
+                  color: Colors.red,
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  margin: EdgeInsets.symmetric(horizontal: 180,vertical: 100),
                   child: DrawingCanvas(
-                    height: MediaQuery.sizeOf(context).height*1,
-                    width: MediaQuery.sizeOf(context).width*0.6,
+                    width: MediaQuery.of(context).size.width*0.95,
+                    height: MediaQuery.of(context).size.height*0.95,
                     drawingMode: drawingMode,
                     selectedColor: selectedColor,
                     strokeSize: strokeSize,
@@ -56,34 +57,34 @@ class DrawingPage extends HookWidget {
                     backgroundImage: backgroundImage,
                   ),
                 ),
-              ),
-              Positioned(
-                top:10,
-                // left: -5,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(-1, 0),
-                    end: Offset.zero,
-                  ).animate(animationController),
-                  child: CanvasSideBar(
-                    drawingMode: drawingMode,
-                    selectedColor: selectedColor,
-                    strokeSize: strokeSize,
-                    eraserSize: eraserSize,
-                    currentSketch: currentSketch,
-                    allSketches: allSketches,
-                    canvasGlobalKey: canvasGlobalKey,
-                    filled: filled,
-                    polygonSides: polygonSides,
-                    backgroundImage: backgroundImage,
+                Positioned(
+                  top: kToolbarHeight + 10,
+                  // left: -5,
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(-1, 0),
+                      end: Offset.zero,
+                    ).animate(animationController),
+                    child: CanvasSideBar(
+                      drawingMode: drawingMode,
+                      selectedColor: selectedColor,
+                      strokeSize: strokeSize,
+                      eraserSize: eraserSize,
+                      currentSketch: currentSketch,
+                      allSketches: allSketches,
+                      canvasGlobalKey: canvasGlobalKey,
+                      filled: filled,
+                      polygonSides: polygonSides,
+                      backgroundImage: backgroundImage,
+                    ),
                   ),
                 ),
-              ),
-              //
-            ],
-          ),
-        ],
-      ),
+                //
+              ],
+            ),
+          ],
+        ),
+      )
     );
   }
 }

@@ -45,7 +45,7 @@ class DrawingCanvas extends HookWidget {
       child: Stack(
         children: [
           buildAllSketches(context),
-          // buildCurrentPath(context),
+          buildCurrentPath(context),
         ],
       ),
     );
