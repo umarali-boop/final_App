@@ -51,8 +51,8 @@ class CanvasSideBar extends HookWidget {
     ));
     final scrollController = useScrollController();
     return Container(
-      width: 300,
-      height: MediaQuery.of(context).size.height < 680 ? 550 : 610,
+      width:  MediaQuery.of(context).size.width*0.3,
+      height: MediaQuery.of(context).size.height*0.8,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
@@ -69,7 +69,7 @@ class CanvasSideBar extends HookWidget {
         thumbVisibility: true,
         trackVisibility: true,
         child: ListView(
-          padding: const EdgeInsets.all(10.0),
+         padding: const EdgeInsets.all(10.0),
           controller: scrollController,
           children: [
             const SizedBox(height: 10),
@@ -152,6 +152,7 @@ class CanvasSideBar extends HookWidget {
               duration: const Duration(milliseconds: 150),
               child: drawingMode.value == DrawingMode.polygon
                   ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Text(
                           'Polygon Sides: ',
@@ -188,36 +189,53 @@ class CanvasSideBar extends HookWidget {
             const Divider(),
             Row(
               children: [
-                const Text(
-                  'Stroke Size: ',
-                  style: TextStyle(fontSize: 12),
+                SizedBox(
+                  width: 80,
+                  child: TextButton(
+
+                    child: const Text('Stroke Size:'),
+                    onPressed: () async {
+                    },
+                  ),
                 ),
-                Slider(
-                  value: strokeSize.value,
-                  min: 0,
-                  max: 50,
-                  onChanged: (val) {
-                    strokeSize.value = val;
-                  },
+                Expanded(
+                  child: Slider(
+                    value: strokeSize.value,
+                    min: 0,
+                    max: 50,
+                    onChanged: (val) {
+                      strokeSize.value = val;
+                    },
+                  ),
                 ),
+
               ],
             ),
             Row(
               children: [
-                const Text(
-                  'Eraser Size: ',
-                  style: TextStyle(fontSize: 12),
+                SizedBox(
+                  width: 80,
+                  child: TextButton(
+
+                    child: const Text('Eraser Size'),
+                    onPressed: () async {
+                    },
+                  ),
                 ),
-                Slider(
-                  value: eraserSize.value,
-                  min: 0,
-                  max: 80,
-                  onChanged: (val) {
-                    eraserSize.value = val;
-                  },
+                Expanded(
+                  child: Slider(
+                    value: eraserSize.value,
+                    min: 0,
+                    max: 80,
+                    onChanged: (val) {
+                      eraserSize.value = val;
+                    },
+                  ),
                 ),
+
               ],
             ),
+
             const SizedBox(height: 20),
             const Text(
               'Actions',
@@ -252,6 +270,7 @@ class CanvasSideBar extends HookWidget {
                       backgroundImage.value = null;
                     } else {
                       backgroundImage.value = await _getImage;
+                      print("Image that am getting ${ backgroundImage.value.toString()}");
                     }
                   },
                   child: Text(
@@ -275,8 +294,9 @@ class CanvasSideBar extends HookWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 140,
+                  width: 80,
                   child: TextButton(
+                    
                     child: const Text('Export PNG'),
                     onPressed: () async {
                       Uint8List? pngBytes = await getBytes();
@@ -285,7 +305,7 @@ class CanvasSideBar extends HookWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 140,
+                  width: 80,
                   child: TextButton(
                     child: const Text('Export JPEG'),
                     onPressed: () async {
@@ -307,6 +327,7 @@ class CanvasSideBar extends HookWidget {
 
   void saveFile(Uint8List bytes, String extension) async {
     if (kIsWeb) {
+      print("image ext----${extension.toString()}");
       html.AnchorElement()
         ..href = '${Uri.dataFromBytes(bytes, mimeType: 'image/$extension')}'
         ..download =
@@ -325,7 +346,7 @@ class CanvasSideBar extends HookWidget {
 
   Future<ui.Image> get _getImage async {
     final completer = Completer<ui.Image>();
-    if (!kIsWeb && !Platform.isAndroid && !Platform.isIOS) {
+    if (!kIsWeb && !Platform. isAndroid && !Platform.isIOS) {
       final file = await FilePicker.platform.pickFiles(
         type: FileType.image,
         allowMultiple: false,

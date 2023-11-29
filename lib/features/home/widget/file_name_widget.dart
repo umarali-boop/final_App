@@ -14,6 +14,7 @@ class FileNameWidget extends StatelessWidget {
     this.imageWidth,
     this.imageHeight,
     this.text,
+    this.img,
     this.style, this.onTap,
   });
 
@@ -22,6 +23,7 @@ class FileNameWidget extends StatelessWidget {
   final double? imageWidth;
   final double? imageHeight;
   final String? text;
+  final String? img;
   final TextStyle? style;
   final Function()? onTap;
 
@@ -31,8 +33,8 @@ class FileNameWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: width ?? 140.w,
-        height: height ?? 140.h,
+        width: width ?? 80.w,
+        height: height ?? 80.h,
         decoration: BoxDecoration(
             color: AppColors.fileNameColor,
             borderRadius: BorderRadius.circular(16.r)),
@@ -41,9 +43,9 @@ class FileNameWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomSvg(
-              image: AppAssets.tree,
-              wi: imageWidth ?? 48.w,
-              hi: imageHeight ?? 60.h,
+              image: img??AppAssets.tree,
+              wi: imageWidth ?? 38.w,
+              hi: imageHeight ?? 50.h,
             ),
             SizedBox(
               height: 16.h,
